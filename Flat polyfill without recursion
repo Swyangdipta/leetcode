@@ -1,0 +1,30 @@
+Array.prototype.flat() without recursion
+function flat(arr, depth=1) {
+  let opArr = arr
+  const final = () => {
+    let op = []
+    opArr.forEach((data) => {
+      if (Array.isArray(data)) {
+        data.forEach((data2) => {
+          op.push(data2)
+        })
+      } else {
+        op.push(data)
+      }
+    })
+    opArr = op
+  }
+  for (let i = 0; i < depth; i++) {
+     if (!opArr.some(Array.isArray)) {
+      break;
+    }
+    final()
+  }
+   console.log(opArr)
+  return opArr
+
+ 
+}
+const arr = [1, [2], [3, [4]]];
+
+flat(arr,1)
